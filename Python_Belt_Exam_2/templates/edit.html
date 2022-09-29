@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>EDIT</title>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+    <p class="alert alert-danger">{{message}}</p>
+    {% endfor %} {% endif %} {% endwith %}
+    <div id="header" style="display:flex; justify-content: space-evenly;">
+        <a href='/addnew'>Add Magazine</a>
+        <a href="/welcome">Dashboard</a>
+        <form action="/logout" method="POST">
+            <button type="Submit" class="btn btn-success">Log Out</button>
+        </form>
+    </div>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+    <p class="alert alert-danger">{{message}}</p>
+    {% endfor %} {% endif %} {% endwith %}
+    <div style="display: flex; justify-content: space-between;">
+        <div style=" margin-top:80px; margin-left: 270px; width: 400px;">
+            <h1 style="margin-left: 30px;">Update User</h1>
+            <form action="/updated/{{users[0]['id']}}" method='POST'>
+                <div class="form-group">
+                    <label for="first_name">First Name- </label>
+                    <input name="first_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{users[0]['first_name']}}">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name- </label>
+                    <input name="last_name" type="text" class="form-control" id="exampleInputPassword1" value="{{users[0]['last_name']}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email- </label>
+                    <input name="email" type="text" class="form-control" id="exampleInputPassword1" value="{{users[0]['email']}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+
+        <div id="container_magazines" style="margin-right:30px;">
+            <h1 style="margin-top:80px; margin-right: 270px; width: 400px;">Users' Magazines</h1>
+            <div class="list-group" style="width: 600px; margin-top: 30px; display: inline-block;">
+                {% for magazines in magazines %}
+                <a name="info" aria-current="true">
+                    <p>{{magazines['name']}}</p>
+                </a>
+                <form action="/delete/{{magazines['id']}}" method="POST">
+                    <input type="hidden" name="magazines_id" value="{{magazines['id']}}">
+                    <button type="delete" class="btn btn-dark">Delete</button>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

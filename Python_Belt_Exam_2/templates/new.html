@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>New User</title>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+    <p class="alert alert-danger">{{message}}</p>
+    {% endfor %} {% endif %} {% endwith %}
+    <div id="header" style="display:flex; justify-content: space-evenly;">
+        <a href="/welcome">Dashboard</a>
+        <form action="/logout" method="POST">
+            <button type="Submit" class="btn btn-success">Logout</button>
+        </form>
+    </div>
+    <h1>Add a Magazine: </h1>
+    <form action="/new_magazine" method="POST">
+        <div class="form-group" style="width: 500px; margin-left: 50px;">
+            <label for="exampleInputEmail1">Title : </label>
+            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group" style="width: 500px; margin-left: 50px;">
+            <label for="exampleInputPassword1">Description: </label>
+            <input name="description" type="text" class="form-control" id="exampleInputPassword1">
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 50px;">Create</button>
+    </form>
+</body>
+
+</html>
